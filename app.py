@@ -39,7 +39,7 @@ def catch_all(path):
         page = int(path[4:6]) - 10
         score = int(path[9:])
         if page == 10:
-            acc = int(((score-10)*100)/9)
+            acc = int(((score-10)*100)/10)
             text2 = "We failed the Turing test..."
             if acc > 50:
                 text2 = "The AI revolution draws closer..."
