@@ -58,7 +58,7 @@ def catch_all(path):
 
 if __name__ == '__main__':
     try:
-        app.run(host='0.0.0.0', port=5000,  debug = True)
+        app.run()
     except Exception as e:
         print(e, file=stderr)
         exit(1)
