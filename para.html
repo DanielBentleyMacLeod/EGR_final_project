@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <!-- Import our custom stylesheet -->
+
+
+        <title>Registrar's Office Class Search</title>
+    </head>
+    <body>
+        <style>
+         body {
+             background-image: url("static/circit.png");
+             background-color: #cccccc;
+         }
+         .box {
+             display:flex;
+             max-width: 900px;
+             margin: 10px auto 0 auto;
+             justify-content: center;
+             color: #C9814D;
+             padding: 20px 20px;
+             border: 0.5rem solid rgba(76, 149, 202, 0.8);
+             border-radius: 20px;
+             background: white;
+             
+         }
+         .aButton {
+             text-align: center;
+             width:  fit-content;
+             margin: 0 auto;
+             margin-top: 20px
+         }
+         .aButton button {
+             height:75px;
+             width:350px; 
+             border: 0.5rem solid rgba(76, 149, 202, 0.8);
+             background-color: white;
+             color: #C9814D;
+             font-weight: bold; 
+             font-size: 25px; 
+             cursor: pointer;
+             border-radius: 5px;
+         }
+
+         .aButton select {
+             width: fit-content;
+             height: auto; 
+             border: 0.5rem solid rgba(76, 149, 202, 0.8);
+             background-color: white;
+             color: #C9814D;
+             font-weight: bold; 
+             font-size: 25px; 
+             cursor: pointer;
+             border-radius: 5px;
+         }
+         .aButton button:hover {
+             -webkit-transform: scale(0.9);
+             -ms-transform: scale(0.9);
+             transform: scale(0.9);
+             transition: 0.3s ease;
+         }
+        </style>
+
+
+        <h1 class="box" style ="font-size: 45px; font-weight: bold;">
+            {{title}}
+        </h1>
+
+        <div class="box" style="max-width: 800px; font-size: 22px; text-indent: 50px; font-family: Verdana;">
+            <p>
+               {{text}}
+            </p>
+        </div>
+
+        <div class="aButton">
+            <a href="page{{page}}scr{{score1}}">
+                <button style ="width: 200px">
+                    Human Author
+                </button>
+            </a>
+            <a href="page{{page}}scr{{score2}}">
+                <button style ="width: 200px">
+                    AI Author
+                </button>
+            </a>
+        </div>
+        <br>
+
+
+    </body>
+</html>

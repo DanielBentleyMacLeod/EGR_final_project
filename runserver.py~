@@ -1,0 +1,120 @@
+#-------------------------------------------------------------------------------
+# runserver.py
+# Author: Gabriel Laniewski, Daniel MacLeod
+#------------------------------------------------------------------------------
+
+import os
+import sys
+import argparse
+import string
+from collections import namedtuple
+import sqlite3
+import textwrap
+from socket import socket, SOL_SOCKET, SO_REUSEADDR
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+
+def read_database_details(num):
+    data = sqlite3.connect("reg.sqlite")
+    cursor = data.cursor()
+    cursor2 = data.cursor()
+    cursor3 = data.cursor()
+    cursor4 = data.cursor()
+    cursor5 = data.cursor()
+    cursor.execute('SELECT * FROM classes WHERE classid ='+str(num))
+    classes = cursor.fetchone()
+    # I can cause this code to execute only by making the client erroneous.
+    if classes == None:
+        raise ValueError(os.path.abspath(__file__)+ ": no class with classid " \
++ str(num) + " exists")
+    cursor2.execute('SELECT * FROM courses WHERE courseid ='+str(classes[1]))
+    cursor3.execute('SELECT * FROM crosslistings WHERE courseid ='+str(classes[\
+1]))
+    cursor4.execute('SELECT * FROM coursesprofs WHERE courseid ='+str(classes[1\
+]))
+    profs = []
+    for p in cursor4.fetchall():
+        cursor5.execute('SELECT profname FROM profs WHERE profid ='+str(p[1]))
+        profs.append(cursor5.fetchone())
+
+    listings = cursor3.fetchall()
+    courses = cursor2.fetchone()
+
+    output = [
+        str(courses[0]),
+        classes[2],
+        str(classes[3]),
+        str(classes[4]),
+        classes[5],
+        classes[6],
+        listings,
+        courses[1],
+        courses[2],
+        courses[3],
+        courses[4],
+        profs
+    ]
+    cursor.close()
+    cursor2.close()
+    cursor3.close()
+    cursor4.close()
+    cursor5.close()
+    return output
+
+
+def read_database(args):
+    data = sqlite3.connect("reg.sqlite")
+    cursor = data.cursor()
+    cursor2 = data.cursor()
+    cursor3 = data.cursor()
+    output = []
+    for row in cursor.execute('SELECT * FROM classes;'):
+        area = True
+        title = True
+
+        cursor3.execute('SELECT * FROM courses WHERE courseid ='+str(row[1]))
+
+        cursor2.execute('SELECT * FROM crosslistings WHERE courseid ='+str(row[1]))
+
+        listing = cursor2.fetchall()
+        courses = cursor3.fetchone()
+
+        if args[0] != chr(26):
+            area = False
+            if args[0].lower() in courses[1].lower():
+                area = True
+
+        if args[1] != chr(26):
+            title = False
+            if args[1].lower() in courses[2].lower():
+                title = True
+
+        for l in listing:
+            directory = True
+            number = True
+            if args[2] != chr(26):
+                if args[2].lower() in l[1].lower():
+                    directory = True
+                else:
+                    directory = False
+            if args[3] != chr(26):
+               # print(l[2])
+                if args[3] in str(l[2]):
+                    number = True
+                else:
+                    number = False
+            if directory and number and area and title:
+                output.append((str(row[0]), l[1], str(l[2]), courses[1], courses[2]))
+    cursor.close()
+    cursor2.close()
+    cursor3.close()
+    return output
+
+def sort_by_dept(e):
+    return e[2]
+
+def sort_by_area(e):
+    return e[1]
+
