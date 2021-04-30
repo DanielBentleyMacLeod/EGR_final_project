@@ -30,13 +30,11 @@ titles = ["Introduction", "Introduction", "Introduction", "Social Construction o
 
 @app.route('/')
 def home():
-    return "home"
     return render_template('main.html')
 
 
 @app.route('/<path:path>')
 def catch_all(path):
-    return "path"
     if "page" in path:
         page = int(path[4:6]) - 10
         score = int(path[9:])
