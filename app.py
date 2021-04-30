@@ -28,7 +28,7 @@ author = [True, False, True, False, True, True, True, False, False, True]
 titles = ["Introduction", "Introduction", "Introduction", "Social Construction of Technology", "Social Construction of Technology", "Social Construction of Technology", "Dangers of AI", "Dangers of AI", "Politics and Technology", "Politics and Technology"]
 
 
-@app.route('/', methods=['GET'])
+@app.route('/')
 def home():
     return render_template('main.html')
 
