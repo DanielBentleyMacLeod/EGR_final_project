@@ -9,7 +9,7 @@ import string
 from collections import namedtuple
 from flask import Flask, render_template, request, make_response
 
-app = Flask(__name__, template_folder='.')
+app = Flask(__name__)
 
 text = ["Artificial Intelligence, usually abbreviated as AI, refers to a variety of algorithms and programs which allow a machine to teach itself how to accomplish a specific task. This can be identifying trends in data, or teaching itself how to complete a complex task. What separates an AI from a traditional computer program is that the program does not tell the AI how to accomplish a specific task. The programmer instead creates a machine capable of learning how to do a task on its own, using either a dataset or feedback from a system. The importance of this distinction is twofold. First of all, an artificial intelligence can learn to complete tasks that we cannot formally express an algorithm for, such as a board game. Secondly, the same AI can be applied to a variety of different applications. ",
         "AI has already been adopted in a wide variety of settings. AI has found applications in such areas as robotics, planning and scheduling, process control, data mining, e-mail filtering, search engines, and speech recognition. Faced with an increasingly global and competitive business environment, organizations are seeking ways to improve their efficiency and effectiveness. The use of AI to improve decision making and achieve these goals is an important part of many organizations' efforts to increase their competitiveness and to gain a competitive edge.",
